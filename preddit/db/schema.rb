@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20130625153400) do
   create_table "posts", force: true do |t|
     t.integer  "user_id"
     t.string   "title"
-    t.string   "link"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20130625153400) do
   create_table "users", force: true do |t|
     t.string   "email"
     t.string   "username"
+    t.integer  "posts_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "encrypted_password",     default: "", null: false
