@@ -5,7 +5,7 @@
     <tr>
       <th>Title</th>
       <th>Link</th>
-      <th></th>
+      <th>User</th>
       <th></th>
       <th></th>
     </tr>
@@ -16,6 +16,7 @@
       <tr>
         <td><%= post.title %></td>
         <td><%= post.link %></td>
+        <td><%= post.user %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  #before_filter :authenticate_user!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
@@ -14,7 +15,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = Post.new(title: "Put your title here")
   end
 
   # GET /posts/1/edit
