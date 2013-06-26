@@ -15,7 +15,11 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new(user: current_user)
+    unless user_signed_in?
+      redirect_to new_user_session_path, alert: 'You have to sign in to post.'
+    else
+      @post = Post.new
+    end
   end
 
   # GET /posts/1/edit
@@ -26,6 +30,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user = current_user
 
     respond_to do |format|
       if @post.save

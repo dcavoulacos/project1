@@ -1,11 +1,11 @@
-<h1>Listing posts</h1>
+<h1>REDDIT</h1>
 
 <table>
   <thead>
     <tr>
       <th>Title</th>
-      <th>Link</th>
-      <th>User</th>
+      <th>Link to Post</th>
+      <th>Posted By</th>
       <th></th>
       <th></th>
     </tr>
@@ -14,12 +14,13 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= post.title %></td>
-        <td><%= post.link %></td>
-        <td><%= post.user %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to post.title, post.link %></td>
+        <td><%= link_to 'View Post', post %></td>
+        <td><%= link_to post.user.username, post.user %></td>
+        <% if current_user == post.user %>
+          <td><%= link_to 'Edit', edit_post_path(post) %></td>
+          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
