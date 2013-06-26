@@ -15,7 +15,11 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    unless user_signed_in?
+      redirect_to new_user_session_path, alert: 'You have to sign in to post.'
+    else
+      @post = Post.new
+    end
   end
 
   # GET /posts/1/edit
@@ -71,6 +75,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :link, :user_id)
+      params.require(:post).permit(:title, :link, :user)
     end
 end

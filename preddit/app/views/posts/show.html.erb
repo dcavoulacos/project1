@@ -5,13 +5,14 @@
 
 <p>
   <strong>Link:</strong>
-  <%= @post.url %>
+  <%= @post.link %>
 </p>
 
 <p>
   <strong>Posted by:</strong>
-  <%= @post.user.username %>
+  <%= link_to @post.user.username, @post.user %>
 </p>
-
+<br>
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
+
