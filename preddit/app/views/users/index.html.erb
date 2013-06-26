@@ -3,11 +3,9 @@
 <table>
   <thead>
     <tr>
-
       <th>Email</th>
-      <th>Username</th>
-      <th>First name</th>
-      <th>Last name</th>
+      <th>Username<br>(Click to show)</th>
+      <th>No. of Posts</th>
     </tr>
   </thead>
 
@@ -15,15 +13,13 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.email %></td>
-        <td><%= user.username %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= link_to 'Show', user %></td>
-        <%# if current_user == post.user %>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to user.username, user %></td>
+        <td><%= user.posts.count %>
+        <% if current_user == user %>
+          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
-      <%# end %>
     <% end %>
   </tbody>
 </table>
