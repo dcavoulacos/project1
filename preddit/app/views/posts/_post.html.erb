@@ -1,0 +1,18 @@
+<div class="post">
+  <div class="post-title"><%= link_to post.title, post %></div>
+  <div class="post-user">Posted by <%= link_to post.user.username, @user %></div>
+  <div class="post-url"><%= simple_format(post.url) %></div>
+
+  <!-- <div class="new-comment">
+	  Leave a comment:
+	  <%#= form_for Comment.new do |f| %>
+	  	<p><%#= f.text_area :content %></p>
+	  	<p><%#= f.hidden_field :post_id, value: post.id %></p>
+	  	<p><%#= f.submit %></p>
+	  <%# end %>
+  </div>
+  <div class="comments">
+  	<%#= render post.comments %>
+  </div> -->
+
+</div>
