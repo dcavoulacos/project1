@@ -41,6 +41,9 @@ gem 'devise', '3.0.0.rc'
 #simple form
 gem 'simple_form'
 
+#pagination gem
+gem 'will_paginate', '~> 3.0'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

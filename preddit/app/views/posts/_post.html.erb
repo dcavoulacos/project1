@@ -1,3 +1,6 @@
 <div class="post">
-  <div class="post-title"><%= link_to post.title, post.link %></div>
+  <br>
+  <div class="post-title"><%= link_to post.title, post %></div>
+  <div class="post-author">Posted by <%= link_to post.user.username, post.user %></div>
+  <div class="post-comments"><%= link_to "comments", post %></div>
 </div>

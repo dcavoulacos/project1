@@ -1,31 +1,28 @@
 <h1>REDDIT</h1>
 
-<table>
+<!-- <table> -->
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Link to Post</th>
-      <th>Posted By</th>
-      <th></th>
-      <th></th>
+      <th><strong>Title</strong></th>
     </tr>
   </thead>
+  <br>
 
-  <tbody>
+  <%= render @posts %>
+ <!--  <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= link_to post.title, post.link %></td>
-        <td><%= link_to 'View Post', post %></td>
-        <td><%= link_to post.user.username, post.user %></td>
+        <td><%= link_to post.title, post %></td>
+        <td><%= link_to post.user.username, post.user %></td> -->
         <% if current_user == post.user %>
           <td><%= link_to 'Edit', edit_post_path(post) %></td>
           <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
-      </tr>
+     <!--  </tr>
     <% end %>
   </tbody>
 </table>
-
+ -->
 <br>
 
 <%= link_to 'New Post', new_post_path %>
