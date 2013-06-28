@@ -1,31 +1,19 @@
 <h1>REDDIT</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Link to Post</th>
-      <th>Posted By</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= link_to post.title, post.link %></td>
-        <td><%= link_to 'View Post', post %></td>
-        <td><%= link_to post.user.username, post.user %></td>
-        <% if current_user == post.user %>
-          <td><%= link_to 'Edit', edit_post_path(post) %></td>
-          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <%#= render @posts %>
+<% @posts.each do |post| %>
+  <div class="post">
+      <br>
+      <div class="post-title"><%= link_to post.title, post.link %></div>
+      <div class="post-author">Posted by <%= link_to post.user.username, post.user %> on <%= post.created_at %></div>
+    <div class="post-show"><%= link_to 'Show Post', post %></div>
+    <div class="post-modify">
+    <% if current_user == post.user %>
+          <%= link_to 'Edit', edit_post_path(post) %></td>
+          <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
 <br>
-
 <%= link_to 'New Post', new_post_path %>

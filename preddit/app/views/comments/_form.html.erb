@@ -1,4 +1,5 @@
 <%= simple_form_for(@comment) do |f| %>
+
   <% if @comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -12,14 +13,13 @@
   <% end %>
 
   <div class="field">
-    <%= f.input :content %>
+    <%= f.input :content, as: :text %>
   </div>
+
   <div class="field">
-    <%= f.association :post %>
+    <%= f.hidden_field :post_id, value: @post.id%>
   </div>
-  <div class="field">
-    <%= f.association :user %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

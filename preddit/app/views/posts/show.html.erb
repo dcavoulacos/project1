@@ -1,13 +1,9 @@
 <%= render @post %>
-
-
-<%= link_to 'Add a Comment', new_comment_path %>
- 	<div class="post-comments">
-  		<strong>Commments:</strong>
-		<p><%= render @post.comments.reverse %></p>
-	</div>
+<br>
+<strong>Comments:</strong>
+<%= render @post.comments %>
 
 <br>
-<%= link_to 'Edit', edit_post_path(@post) %> |
+<strong>Add a Comment:</strong>
+<%= render "comments/form" %>
 <%= link_to 'Back', posts_path %>
-
