@@ -5,8 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-me = User.create!(username: "raph", email: "raphael.leung@yale.edu", password: "blah1234")
+me = User.create!(username: "raph", email: "raphael.leung@yale.edu", first_name: "Raph", last_name: "Leung", password: "blah1234")
 
-5.times do 
-	Post.create!(title: "Blah", link: "http://www.google.com", user: me)
+5.times do
+	Post.create!(title: "Google", link: "http://www.google.com", user: me)
 end

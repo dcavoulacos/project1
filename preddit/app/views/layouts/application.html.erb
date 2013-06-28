@@ -8,6 +8,7 @@
 </head>
 <body>
 
+  <%= link_to 'Reddit', posts_path %>
   <%# user is logged in, show log out link %>
   <% if current_user.present? %>
     <%= 'Hello, ' + current_user.first_name %>

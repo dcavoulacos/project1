@@ -1,4 +1,6 @@
 Preddit::Application.routes.draw do
+  resources :comments
+
   devise_for :users
   resources :pages
   resources :posts

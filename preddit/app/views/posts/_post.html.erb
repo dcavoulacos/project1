@@ -1,3 +1,23 @@
 <div class="post">
-  <div class="post-title"><%= link_to post.title, post.link %></div>
+  	<div class="post-title">
+  		<strong>Title:</strong>
+  		<p><%= link_to post.title %></p>
+	</div>
+
+  	<div class="post-link">
+  		<strong>Link:</strong>
+  		<p><%= link_to post.link %></p>
+	</div>
+
+	<div class="post-user">
+  	<strong>Posted by:</strong>
+  	<p><%= link_to @post.user.username, @post.user %></p>
+  	</div>
+
+ 	<div class="post-comments">
+  		<strong>Commments:</strong>
+		<p><%= render @post.comments %></p>
+	</div>
+
+
 </div>
