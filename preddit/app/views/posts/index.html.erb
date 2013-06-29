@@ -1,19 +1,4 @@
 <h1>REDDIT</h1>
-    <%#= render @posts %>
-<% @posts.each do |post| %>
-  <div class="post">
-      <br>
-      <div class="post-title"><%= link_to post.title, post.link %></div>
-      <div class="post-author">Posted by <%= link_to post.user.username, post.user %> on <%= post.created_at %></div>
-    <div class="post-show"><%= link_to 'Show Post', post %></div>
-    <div class="post-modify">
-    <% if current_user == post.user %>
-          <%= link_to 'Edit', edit_post_path(post) %></td>
-          <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
+    <%= render @posts %>
 <br>
 <%= link_to 'New Post', new_post_path %>

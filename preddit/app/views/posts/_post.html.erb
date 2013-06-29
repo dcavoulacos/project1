@@ -2,6 +2,7 @@
   	<br>
   	<div class="post-title"><%= link_to post.title, post.link %></div>
   	<div class="post-author">Posted by <%= link_to post.user.username, post.user %> on <%= post.created_at %></div>
+  	<div class="post-show"><%= link_to 'Show Post', post %></div>
 	<div class="post-modify">
 	<% if current_user == post.user %>
         <%= link_to 'Edit', edit_post_path(post) %></td>

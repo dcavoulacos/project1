@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130628144413) do
+ActiveRecord::Schema.define(version: 20130628234336) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -55,5 +55,11 @@ ActiveRecord::Schema.define(version: 20130628144413) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["username"], name: "index_users_on_username", unique: true
+
+  create_table "votes", force: true do |t|
+    t.boolean "up"
+    t.integer "user_id"
+    t.integer "post_id"
+  end
 
 end
