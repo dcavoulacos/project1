@@ -2,7 +2,14 @@
   	<br>
   	<div class="post-title"><%= link_to post.title, post.link %></div>
   	<div class="post-author">Posted by <%= link_to post.user.username, post.user %> on <%= post.created_at %></div>
-  	<div class="post-show"><%= link_to 'Show Post', post %></div>
+  	<div class="post-show"><%= link_to 'comments', post %></div>
+    <div class="post-votes">
+      <%= link_to "+", votes_path(vote: {post_id: post.id, up: true}), method: :post %>
+      <%= link_to "-", votes_path(vote: {post_id: post.id, up: false}), method: :post %>
+    </div>
+    Up Votes: <%= post.votes.where(up: true).count %>
+    Down Votes: <%= post.votes.where(up: false).count %>
+    Votes: <%= post.votes.where(up: true).count - post.votes.where(up:false).count %>
 	<div class="post-modify">
 	<% if current_user == post.user %>
         <%= link_to 'Edit', edit_post_path(post) %></td>

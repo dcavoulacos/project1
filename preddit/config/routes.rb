@@ -1,4 +1,6 @@
 Preddit::Application.routes.draw do
+  resources :votes
+
   resources :comments
 
   devise_for :users
