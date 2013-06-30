@@ -1,6 +1,6 @@
 class VotesController < ApplicationController
   before_action :set_vote, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /votes
   # GET /votes.json
   def index
@@ -69,6 +69,6 @@ class VotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vote_params
-      params.require(:vote).permit(:post_id, :up)
+      params.require(:vote).permit(:post_id, :up, :comment_id)
     end
 end

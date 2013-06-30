@@ -1,19 +1,29 @@
 <div class="post">
   	<br>
-  	<div class="post-title"><%= link_to post.title, post.link %></div>
-  	<div class="post-author">Posted by <%= link_to post.user.username, post.user %> on <%= post.created_at %></div>
-  	<div class="post-show"><%= link_to 'comments', post %></div>
-    <div class="post-votes">
-      <%= link_to "+", votes_path(vote: {post_id: post.id, up: true}), method: :post %>
-      <%= link_to "-", votes_path(vote: {post_id: post.id, up: false}), method: :post %>
-    </div>
-    Up Votes: <%= post.votes.where(up: true).count %>
-    Down Votes: <%= post.votes.where(up: false).count %>
-    Votes: <%= post.votes.where(up: true).count - post.votes.where(up:false).count %>
-	<div class="post-modify">
-	<% if current_user == post.user %>
-        <%= link_to 'Edit', edit_post_path(post) %></td>
-        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <% end %>
-	</div>
+  	<table>
+      <tr>
+        <td>
+          <%= button_to "↑", votes_path(vote: {post_id: post.id, up: true}) %>
+          <%= button_to "↓", votes_path(vote: {post_id: post.id, up: false}) %>
+        </td>
+        <td>
+          <div class="post-title"><%= link_to post.title, post.link %></div>
+          <div class="post-author">Posted by <%= link_to post.user.username, post.user %> on <%= post.created_at %>
+          </div>
+          <div class="post-show">
+              <%= link_to 'Comments', post %>
+              (<%= post.comments.count%>)
+          </div>
+          <div class="post-votes">
+          Up votes: <%= post.votes.where(up: true).count %>
+          Down votes: <%= post.votes.where(up: false).count %>
+          Net: <%= post.votes.where(up: true).count - post.votes.where(up:false).count %></div>
+          <div class="post-modify">
+            <% if current_user == post.user %>
+            <%= link_to 'Edit', edit_post_path(post) %>
+            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %> </div>
+        </td>
+      </tr>
+    </table>
 </div>

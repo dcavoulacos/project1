@@ -1,5 +1,24 @@
 <div class="comment">
-  <div class="comment-content"><%= comment.content %></div>
-  <div class="comment-user">Posted by:<%= link_to comment.user.username, comment.user %> on <%= comment.created_at %></div>
-  <br>
+	<table>
+      <tr>
+        <td>
+          <%= button_to "↑", votes_path(vote: {comment_id: comment.id, up: true}) %>
+          <%= button_to "↓", votes_path(vote: {comment_id: comment.id, up: false}) %>
+        </td>
+        <td>
+          <div class="comment-content"><%= comment.content %></div>
+          <div class="comment-user">Posted by:<%= link_to comment.user.username, comment.user %> on <%= comment.created_at %></div>
+          <div class="comment-votes">
+          Up Votes: <%= comment.votes.where(up: true).count %>
+          Down Votes: <%= comment.votes.where(up: false).count %>
+          Net: <%= comment.votes.where(up: true).count - comment.votes.where(up:false).count %></div>
+          <div class="comment-modify">
+            <% if current_user == comment.user %>
+            <%= link_to 'Edit', edit_comment_path(comment) %>
+            <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %> </div>
+        </td>
+      </tr>
+    </table>
+    <br>
 </div>

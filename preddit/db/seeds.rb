@@ -10,3 +10,5 @@ me = User.create!(username: "raph", email: "raphael.leung@yale.edu", first_name:
 5.times do
 	Post.create!(title: "Google", link: "http://www.google.com", user: me)
 end
+
+Comment.create!(content: "Comment1", user:me, post_id:1)

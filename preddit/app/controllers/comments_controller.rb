@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  # before_filter :prepare_user_form, only: [:index, :new, :create]
 
   # GET /comments
   # GET /comments.json
@@ -15,7 +16,11 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment = Comment.new
+    unless user_signed_in?
+      redirect_to new_user_session_path, alert: 'You have to sign in to post.'
+    else
+      @comment = Comment.new
+    end
   end
 
   # GET /comments/1/edit
@@ -61,6 +66,13 @@ class CommentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # protected
+
+  # def prepare_comment_form
+  #   @comment = Comment.new(comment_params)
+  #   @comment.user = current_user
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

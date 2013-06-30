@@ -3,6 +3,7 @@ class CreateVotes < ActiveRecord::Migration
     create_table :votes do |t|
       t.references :user, index: true
       t.references :post, index: true
+      t.references :comment, index: true
       t.boolean :up
 
       t.timestamps

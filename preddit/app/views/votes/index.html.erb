@@ -5,6 +5,7 @@
     <tr>
       <th>User</th>
       <th>Post</th>
+      <th>Comment</th>
       <th>Up</th>
       <th></th>
       <th></th>
@@ -17,6 +18,7 @@
       <tr>
         <td><%= vote.user %></td>
         <td><%= vote.post %></td>
+        <td><%= vote.comment %></td>
         <td><%= vote.up %></td>
         <td><%= link_to 'Show', vote %></td>
         <td><%= link_to 'Edit', edit_vote_path(vote) %></td>
