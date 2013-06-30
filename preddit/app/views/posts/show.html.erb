@@ -1,9 +1,8 @@
 <%= render @post %>
 <br>
-
 <div class="comment-header">Comments:</div>
 
-<%= render @post.comments %>
+<%= render @post.comments.reverse %>
 
 <br>
 <strong>Add a Comment:</strong>

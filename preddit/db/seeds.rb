@@ -11,4 +11,6 @@ me = User.create!(username: "raph", email: "raphael.leung@yale.edu", first_name:
 	Post.create!(title: "Google", link: "http://www.google.com", user: me)
 end
 
-Comment.create!(content: "Comment1", user:me, post_id:1)
+Comment.create!(content: "Comment1", user: me, post_id: 1)
+
+Vote.create!(up: true, post_id: 1, user: me)

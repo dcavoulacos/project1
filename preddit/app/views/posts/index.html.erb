@@ -1,4 +1,18 @@
 <h1>REDDIT</h1>
-    <%= render @posts %>
 <br>
+<strong> Net +ve </strong>
+<% @posts.each do |post| %>
+	<% if (post.votes.where(up:true).count - post.votes.where(up:false).count >= 0) %>
+		<%= render post %>
+	<% end %>
+<% end %>
+<br>
+<strong> Net -ve </strong>
+<% @posts.each do |post| %>
+	<% if (post.votes.where(up:true).count - post.votes.where(up:false).count < 0) %>
+		<%= render post %>
+	<% end %>
+<% end %>
+<br>
+
 <%= link_to 'New Post', new_post_path %>
