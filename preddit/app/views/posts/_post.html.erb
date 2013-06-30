@@ -3,8 +3,16 @@
   	<table>
       <tr>
         <td>
-          <%= button_to "+", votes_path(vote: {post_id: post.id, up: true}) %>
-          <%= button_to "-", votes_path(vote: {post_id: post.id, up: false}) %>
+        <% if current_user.votes.where(:post_id => post.id, :up => true).present? %>
+           ↑
+        <% else %>
+          <%= button_to "↑", votes_path(vote: {post_id: post.id, up: true}) %>
+        <% end %>
+        <% if current_user.votes.where(:post_id => post.id, :up => false).present? %>
+           ↓
+        <% else %>
+          <%= button_to "↓", votes_path(vote: {post_id: post.id, up: false}) %>
+        <% end %>
         </td>
         <td>
           <div class="post-title"><%= link_to post.title, post.link %></div>
@@ -17,7 +25,9 @@
           <div class="post-votes">
           Up votes: <%= post.votes.where(up: true).count %>
           Down votes: <%= post.votes.where(up: false).count %>
-          Net: <%= post.votes.where(up: true).count - post.votes.where(up:false).count %></div>
+          Net: <%= post.votes.where(up: true).count - post.votes.where(up:false).count %>
+          <%= link_to 'Unvote (DIY)', votes_path %>
+          </div>
           <div class="post-modify">
             <% if current_user == post.user %>
             <%= link_to 'Edit', edit_post_path(post) %>

@@ -24,7 +24,9 @@ class VotesController < ApplicationController
   # POST /votes
   # POST /votes.json
   def create
-    @vote = current_user.votes.create(vote_params)
+    @vote = current_user.votes.where(:post_id => params[:vote][:post_id]).first
+    @vote ||= current_user.votes.create(vote_params)
+    @vote.update_attributes(:up => params[:vote][:up])
     redirect_to :back
     # respond_to do |format|
     #   if @vote.save

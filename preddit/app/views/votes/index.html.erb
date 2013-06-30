@@ -6,7 +6,7 @@
       <th>User</th>
       <th>Post</th>
       <th>Comment</th>
-      <th>Up</th>
+      <th>Voted Up?</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,7 +16,7 @@
   <tbody>
     <% @votes.each do |vote| %>
       <tr>
-        <td><%= vote.user %></td>
+        <td><%= vote.user.username %></td>
         <td><%= vote.post %></td>
         <td><%= vote.comment %></td>
         <td><%= vote.up %></td>

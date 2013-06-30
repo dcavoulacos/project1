@@ -2,8 +2,16 @@
 	<table>
       <tr>
         <td>
-          <%= button_to "↑", votes_path(vote: {comment_id: comment.id, up: true}) %>
-          <%= button_to "↓", votes_path(vote: {comment_id: comment.id, up: false}) %>
+          <% if current_user.votes.where(:comment_id => comment.id, :up => true).present? %>
+             ↑
+          <% else %>
+            <%= button_to "↑", votes_path(vote: {comment_id: comment.id, up: true}) %>
+          <% end %>
+          <% if current_user.votes.where(:comment_id => comment.id, :up => false).present? %>
+             ↓
+          <% else %>
+            <%= button_to "↓", votes_path(vote: {comment_id: comment.id, up: false}) %>
+          <% end %>
         </td>
         <td>
           <div class="comment-content"><%= comment.content %></div>
@@ -11,7 +19,9 @@
           <div class="comment-votes">
           Up Votes: <%= comment.votes.where(up: true).count %>
           Down Votes: <%= comment.votes.where(up: false).count %>
-          Net: <%= comment.votes.where(up: true).count - comment.votes.where(up:false).count %></div>
+          Net: <%= comment.votes.where(up: true).count - comment.votes.where(up:false).count %>
+          <%= link_to 'Unvote (DIY)', votes_path %>
+          </div>
           <div class="comment-modify">
             <% if current_user == comment.user %>
             <%= link_to 'Edit', edit_comment_path(comment) %>
