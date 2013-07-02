@@ -1,19 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @comment.content %>
-</p>
+<%= render @comment %>
 
-<p>
-  <strong>User:</strong>
-  <%= @comment.user %>
-</p>
+<br>
+<strong>Add a Comment:</strong>
+<%= render 'comments/commentform' %>
+<br>
 
-<p>
-  <strong>Post:</strong>
-  <%= @comment.post %>
-</p>
+<div class="comment-header">Comments:</div>
+<%= render @comment.comments.reverse %>
 
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
 <%= link_to 'Back', comments_path %>

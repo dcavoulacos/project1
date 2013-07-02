@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
+    @new_comment = Comment.new
   end
 
   # GET /comments/new
@@ -82,6 +83,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:content, :post_id)
+      params.require(:comment).permit(:content, :post_id, :comment_id)
     end
 end

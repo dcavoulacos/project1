@@ -1,10 +1,9 @@
 <%= render @post %>
 <br>
-<div class="comment-header">Comments:</div>
-
-<%= render @post.comments.reverse %>
-
-<br>
 <strong>Add a Comment:</strong>
-<%= render 'comments/form' %>
+<%= render 'comments/postform' %>
+<br>
+<div class="comment-header">Comments:</div>
+<%= render @post.comments.where(comment_id: nil).reverse %>
+
 <%= link_to 'Back', posts_path %>

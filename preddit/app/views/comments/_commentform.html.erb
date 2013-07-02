@@ -1,0 +1,30 @@
+<%= simple_form_for(@new_comment) do |f|%>
+
+  <% if @new_comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @new_comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.input :content, as: :text %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :comment_id, value: @comment.id%>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :post_id, value: @comment.post.id%>
+  </div>  
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
