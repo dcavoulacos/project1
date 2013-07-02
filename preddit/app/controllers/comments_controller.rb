@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
+    @new_comment = Comment.new
   end
 
   # GET /comments/new
@@ -19,7 +20,7 @@ class CommentsController < ApplicationController
     unless user_signed_in?
       redirect_to new_user_session_path, alert: 'You have to sign in to post.'
     else
-      @new_comment = Comment.new
+      @comment = Comment.new
     end
   end
 
