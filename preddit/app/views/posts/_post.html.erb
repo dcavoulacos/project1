@@ -4,13 +4,13 @@
       <tr>
         <td>
         <% if current_user && current_user.votes.where(:post_id => post.id, :up => true).present? %>
-           ↑
-        <% else %>
+          <%= submit_tag "x", type: 'button' %>
+          <%= button_to "↓", votes_path(vote: {post_id: post.id, up: false}) %>
+        <% elsif current_user && current_user.votes.where(:post_id => post.id, :up => false).present? %>
           <%= button_to "↑", votes_path(vote: {post_id: post.id, up: true}) %>
-        <% end %>
-        <% if current_user && current_user.votes.where(:post_id => post.id, :up => false).present? %>
-           ↓
-        <% else %>
+          <%= submit_tag "x", type: 'button' %>
+        <% elsif current_user %>
+          <%= button_to "↑", votes_path(vote: {post_id: post.id, up: true}) %>       
           <%= button_to "↓", votes_path(vote: {post_id: post.id, up: false}) %>
         <% end %>
         </td>
@@ -25,7 +25,7 @@
           <div class="post-votes">
           Up votes: <%= post.votes.where(up: true).count %>
           Down votes: <%= post.votes.where(up: false).count %>
-          Net: <%= post.votes.where(up: true).count - post.votes.where(up:false).count %>
+          Net: <%= post.net_vote_count %>
           <% if current_user && current_user.votes.where(:post_id => post.id).present? %>
             <%= link_to 'Unvote (DIY)', votes_path %>
           <% end %>

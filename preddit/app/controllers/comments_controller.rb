@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
     unless user_signed_in?
       redirect_to new_user_session_path, alert: 'You have to sign in to post.'
     else
-      @comment = Comment.new
+      @new_comment = Comment.new
     end
   end
 
@@ -82,6 +82,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:content, :post_id)
+      params.require(:comment).permit(:content, :post_id, :comment_id)
     end
 end

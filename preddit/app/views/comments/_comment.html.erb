@@ -2,14 +2,14 @@
 	<table>
       <tr>
         <td>
-          <% if current_user && current_user.votes.where(:comment_id => comment.id, :up => true).present? %>
-             ↑
-          <% else %>
+            <% if current_user && current_user.votes.where(:comment_id => comment.id, :up => true).present? %>
+            <%= submit_tag "x", type: 'button' %>
+            <%= button_to "↓", votes_path(vote: {comment_id: comment.id, up: false}) %>
+          <% elsif current_user && current_user.votes.where(:comment_id => comment.id, :up => false).present? %>
             <%= button_to "↑", votes_path(vote: {comment_id: comment.id, up: true}) %>
-          <% end %>
-          <% if current_user && current_user.votes.where(:comment_id => comment.id, :up => false).present? %>
-             ↓
-          <% else %>
+            <%= submit_tag "x", type: 'button' %>
+          <% elsif current_user %>
+            <%= button_to "↑", votes_path(vote: {comment_id: comment.id, up: true}) %>       
             <%= button_to "↓", votes_path(vote: {comment_id: comment.id, up: false}) %>
           <% end %>
         </td>
@@ -23,12 +23,14 @@
           <% if current_user && current_user.votes.where(:comment_id => comment.id).present? %>
             <%= link_to 'Unvote (DIY)', votes_path %>
           <% end %>
+          <%= link_to 'reply', comment_path(comment) %>
           </div>
           <div class="comment-modify">
             <% if current_user == comment.user %>
             <%= link_to 'Edit', edit_comment_path(comment) %>
             <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <% end %> </div>
+            <% end %> 
+          </div>
         </td>
       </tr>
     </table>
