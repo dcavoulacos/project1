@@ -21,6 +21,10 @@
 	<%= render @user.posts.reverse %>
 <% end %>
 
+<strong>Comment count:</strong> <%= @user.comments.count %>
+<br>
+<strong>Vote count:</strong> <%= @user.votes.count %>
+
 <br>
 <% if current_user == @user %>
 	<%= link_to 'Edit User Profle', edit_user_path(@user) %>
