@@ -32,7 +32,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = current_user.comments.create(comment_params)
-    redirect_to :back
+    redirect_to @comment.post
     # respond_to do |format|
     #   if @comment.save
     #     format.html { redirect_to @comment, notice: 'Comment was successfully created.' }

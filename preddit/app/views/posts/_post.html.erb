@@ -16,7 +16,7 @@
         </td>
         <td>
           <div class="post-title"><%= link_to post.title, post.link %></div>
-          <div class="post-author">Posted by <%= link_to post.user.username, post.user %> on <%= post.created_at %>
+          <div class="post-author">Posted by <%= link_to post.user.username, post.user %> <%= time_ago_in_words(post.created_at) %> ago
           </div>
           <div class="post-show">
               <%= link_to 'Comments', post %>
