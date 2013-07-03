@@ -3,11 +3,11 @@
       <tr>
         <td>
             <% if current_user && current_user.votes.where(:comment_id => comment.id, :up => true).present? %>
-            <%= submit_tag "x", type: 'button' %>
+            <%= button_to "x", votes_path(vote: {user_id: current_user, comment_id: comment.id}, method: 'delete') %>
             <%= button_to "↓", votes_path(vote: {comment_id: comment.id, up: false}) %>
           <% elsif current_user && current_user.votes.where(:comment_id => comment.id, :up => false).present? %>
             <%= button_to "↑", votes_path(vote: {comment_id: comment.id, up: true}) %>
-            <%= submit_tag "x", type: 'button' %>
+            <%= button_to "x", votes_path(vote: {user_id: current_user, comment_id: comment.id}, method: 'delete') %>
           <% elsif current_user %>
             <%= button_to "↑", votes_path(vote: {comment_id: comment.id, up: true}) %>       
             <%= button_to "↓", votes_path(vote: {comment_id: comment.id, up: false}) %>
@@ -15,16 +15,15 @@
         </td>
         <td>
           <div class="comment-content"><%= comment.content %></div>
-          <div class="comment-user">Posted by:<%= link_to comment.user.username, comment.user %> on <%= comment.created_at %></div>
+          <div class="comment-user">Posted by:  <%= link_to comment.user.username, comment.user %> on <%= comment.created_at %></div>
           <div class="comment-votes">
           Up Votes: <%= comment.votes.where(up: true).count %>
           Down Votes: <%= comment.votes.where(up: false).count %>
           Net: <%= comment.votes.where(up: true).count - comment.votes.where(up:false).count %>
-          <% if current_user && current_user.votes.where(:comment_id => comment.id).present? %>
-            <%= link_to 'Unvote (DIY)', votes_path %>
-          <% end %>
+
           <%= link_to 'reply', comment_path(comment) %>
           </div>
+
           <div class="comment-modify">
             <% if current_user == comment.user %>
             <%= link_to 'Edit', edit_comment_path(comment) %>
