@@ -14,3 +14,20 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+    $types = $('.syncTypes');
+    $self_posts = $('#self_posts');
+    $link_posts = $('#link_posts');
+    $types.change(function() {
+        $this = $(this).val();
+        if ($this == "types") {
+            $link_posts.slideUp(200);
+            $self_posts.delay(200).slideDown(200);
+        }
+        else if ($this == "link_posts") {
+            $self_posts.slideUp(200);
+            $link_posts.delay(200).slideDown(200);
+        }
+    });
+});

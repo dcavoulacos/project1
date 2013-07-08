@@ -8,8 +8,8 @@
           <% elsif current_user && current_user.votes.where(:comment_id => comment.id, :up => false).present? %>
             <%= button_to "↑", votes_path(vote: {comment_id: comment.id, up: true}) %>
             <%= button_to "x", votes_path(vote: {user_id: current_user, comment_id: comment.id}, method: 'delete') %>
-          <% elsif current_user %>
-            <%= button_to "↑", votes_path(vote: {comment_id: comment.id, up: true}) %>       
+          <% else %>
+            <%= button_to "↑", votes_path(vote: {comment_id: comment.id, up: true}) %>
             <%= button_to "↓", votes_path(vote: {comment_id: comment.id, up: false}) %>
           <% end %>
         </td>
