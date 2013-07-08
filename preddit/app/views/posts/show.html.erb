@@ -1,7 +1,7 @@
 <%= render @post %>
 <br>
 <strong>Add a Comment:</strong>
-<%= render 'comments/postform' %>
+<%= render 'comments/form' %>
 <br>
 <div class="comment-header">Comments:</div>
 <%= render @post.comments.where(comment_id: nil).reverse %>

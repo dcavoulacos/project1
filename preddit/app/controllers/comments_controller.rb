@@ -32,16 +32,16 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = current_user.comments.create(comment_params)
-    redirect_to @comment.post
-    # respond_to do |format|
-    #   if @comment.save
-    #     format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-    #     format.json { render action: 'show', status: :created, location: @comment }
-    #   else
-    #     format.html { render action: 'new' }
-    #     format.json { render json: @comment.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @comment.post}
+        format.js
+        format.json { render action: 'show', status: :created, location: @comment }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /comments/1
@@ -62,7 +62,7 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.json
   def destroy
     @comment.destroy
-    redirect_to :back
+    redirect_to :back 
   end
 
   # protected

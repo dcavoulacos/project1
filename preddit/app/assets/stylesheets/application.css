@@ -16,3 +16,7 @@
 .comment-content {
 	font-style: italic;
 }
+
+.subcomments {
+	list-style-type: none;
+}

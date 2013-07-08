@@ -1,5 +1,5 @@
 <div class="comment">
-	<table>
+	<table id="comment_<%= comment.id %>">
       <tr>
         <td>
           <% if current_user && current_user.votes.where(:comment_id => comment.id, :up => true).present? %>
@@ -18,11 +18,14 @@
           <div class="comment-user">Posted by: <%= link_to comment.user.username, comment.user %> <%= time_ago_in_words(comment.created_at) %> ago
           </div>
           <div class="comment-votes">
-          Up Votes: <%= comment.votes.where(up: true).count %>
-          Down Votes: <%= comment.votes.where(up: false).count %>
-          Net: <%= comment.votes.where(up: true).count - comment.votes.where(up:false).count %>
+            Up Votes: <%= comment.votes.where(up: true).count %>
+            Down Votes: <%= comment.votes.where(up: false).count %>
+            Net: <%= comment.votes.where(up: true).count - comment.votes.where(up:false).count %>
 
-          <%= link_to 'reply', comment_path(comment) %>
+            <%= link_to 'reply', comment_path(comment) %>
+            <div>
+              <%#= render 'comments/commentform' %>
+            </div>
           </div>
 
           <div class="comment-modify">
@@ -34,8 +37,9 @@
         </td>
       </tr>
     </table>
-    <p class="subcomments">
-      <%= render comment.comments %>
-    </p>
-    <% if comment.comments.present? %> <br> <% end %>
+    <ul class="subcomments" >
+      <% comment.comments.each do |sub| %>
+      <li><%= render sub %></li>
+      <% end  %>
+    </ul>
 </div>
