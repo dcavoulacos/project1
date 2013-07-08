@@ -24,19 +24,16 @@ class VotesController < ApplicationController
   # POST /votes
   # POST /votes.json
   def create
-    @vote = current_user.votes.where(:post_id => params[:vote][:post_id]).first
-    @vote ||= current_user.votes.create(vote_params)
-    @vote.update_attributes(:up => params[:vote][:up])
+    if vote_params[:comment_id].present?
+      @vote = current_user.votes.where(:comment_id => params[:vote][:comment_id]).first 
+      @vote ||= current_user.votes.create(vote_params)
+      @vote.update_attributes(:up => params[:vote][:up])
+    elsif vote_params[:post_id].present?
+      @vote = current_user.votes.where(:post_id => params[:vote][:post_id]).first
+      @vote ||= current_user.votes.create(vote_params)
+      @vote.update_attributes(:up => params[:vote][:up])
+    end
     redirect_to :back
-    # respond_to do |format|
-    #   if @vote.save
-    #     format.html { redirect_to @vote, notice: 'Vote was successfully created.' }
-    #     format.json { render action: 'show', status: :created, location: @vote }
-    #   else
-    #     format.html { render action: 'new' }
-    #     format.json { render json: @vote.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # PATCH/PUT /votes/1

@@ -1,3 +1,5 @@
+<script type="text/javascript" src="application.js"></script>
+
 <%= simple_form_for(@post) do |f| %>
 
   <% if @post.errors.any? %>
@@ -16,10 +18,16 @@
     <%= f.input :title %>
   </div>
 
-  <div class="field">
-    <%= f.input :link %>
+  <div id="select_post_type">
+    <p>Select a post type:</p>
+    <input type="radio" value="types" class="syncTypes" name="syncTypes"> Text Post<br>
+    <input type="radio" value="link_posts" class="syncTypes" name="syncTypes"> Link Post
+    <div id="self_posts" style="display:none;border:1px #666 solid;padding:3px;top:15px;position:relative">
+    <%= f.input :link, :placeholder => 'Enter text here' %></div>
+    <div id="link_posts" style="display:none;border:1px #666 solid;padding:3px;top:15px;position:relative">
+    <%= f.input :link, :placeholder => 'Enter URL here' %></div>
   </div>
-
+  <br />
   <div class="actions">
     <%= f.button :submit %>
   </div>
