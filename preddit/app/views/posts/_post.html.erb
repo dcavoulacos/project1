@@ -15,7 +15,11 @@
         <% end %>
         </td>
         <td>
+          <% if post.link.present? %>
           <div class="post-title"><%= link_to post.title, post.link %></div>
+          <% else %>
+          <div class="post-link"><%= link_to post.title, post %></div>
+          <% end %>
           <div class="post-author">Posted by <%= link_to post.user.username, post.user %> <%= time_ago_in_words(post.created_at) %> ago
           </div>
           <div class="post-show">

@@ -6,9 +6,9 @@
   <div class="form-inputs">
     <%= f.input :username, :required => true, :autofocus => true %>
     <%= f.input :first_name, :required => true%>
-    <%= f.input :last_name, :required => true%>
+    <%= f.input :last_name, :required => false%>
     <%= f.input :email, :required => true %>
-    <%= f.input :password, :required => true %>
+    <%= f.input :password, :placeholder => "At least 8 characters", :required => true %>
     <%= f.input :password_confirmation, :required => true %>
   </div>
 
