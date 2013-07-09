@@ -3,14 +3,16 @@
       <tr>
         <td>
           <% if current_user && current_user.votes.where(:comment_id => comment.id, :up => true).present? %>
-            <%= button_to "x", votes_path(vote: {user_id: current_user, comment_id: comment.id}, method: 'delete') %>
-            <%= button_to "↓", votes_path(vote: {comment_id: comment.id, up: false}) %>
+            <%= button_to "Unvote", votes_path(vote: {user_id: current_user, comment_id: comment.id}, method: 'delete') %>
+            <%= link_to image_tag("/downvote.png"), votes_path(vote: {comment_id: comment.id, up: false}) %>
           <% elsif current_user && current_user.votes.where(:comment_id => comment.id, :up => false).present? %>
-            <%= button_to "↑", votes_path(vote: {comment_id: comment.id, up: true}) %>
+            <%= link_to image_tag("/upvote.png"), votes_path(vote: {comment_id: comment.id, up: true}) %>
             <%= button_to "x", votes_path(vote: {user_id: current_user, comment_id: comment.id}, method: 'delete') %>
           <% else %>
-            <%= button_to "↑", votes_path(vote: {comment_id: comment.id, up: true}) %>
-            <%= button_to "↓", votes_path(vote: {comment_id: comment.id, up: false}) %>
+            <%= link_to image_tag("/upvote.png"), votes_path(vote: {comment_id: comment.id, up: true}) %><br>
+              <div class="net-vote">
+              <%= comment.votes.where(up: true).count - comment.votes.where(up:false).count %></div>
+            <%= link_to image_tag("/downvote.png"), votes_path(vote: {comment_id: comment.id, up: false}) %>
           <% end %>
         </td>
         <td>
@@ -20,8 +22,6 @@
           <div class="comment-votes">
             Up Votes: <%= comment.votes.where(up: true).count %>
             Down Votes: <%= comment.votes.where(up: false).count %>
-            Net: <%= comment.votes.where(up: true).count - comment.votes.where(up:false).count %>
-
             <%= link_to 'reply', comment_path(comment) %>
             <div>
               <%#= render 'comments/commentform' %>
@@ -32,7 +32,7 @@
             <% if current_user == comment.user %>
             <%= link_to 'Edit', edit_comment_path(comment) %>
             <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <% end %> 
+            <% end %>
           </div>
         </td>
       </tr>

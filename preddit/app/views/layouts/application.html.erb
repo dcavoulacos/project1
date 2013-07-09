@@ -5,26 +5,36 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
+    <script src="http://code.jquery.com/jquery.js"></script>
+      <script src="js/bootstrap.min.js"></script>
 
-  <%=link_to image_tag("/alien.png"), posts_path %>
-  <br>
-  <%# user is logged in, show log out link %>
-  <% if current_user.present? %>
-    <%= 'Hello, ' + current_user.username %>
-    <%= link_to 'My Account', current_user %>
-    <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
-  <%# user is not logged in, show signup and login links %>
-  <% else %>
-    <%= link_to 'Sign In', new_user_session_path %> |
-    <%= link_to 'Register Now', new_user_registration_path %>
-  <% end %>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+      <div id="wrapper">
+        <div id="content">
 
-<%= yield %>
+          <%=link_to image_tag("/alien.png"), posts_path %>
+          <%# user is logged in, show log out link %>
+          <% if current_user.present? %>
+            <%= 'Hello, ' + current_user.username %>
+            <%= link_to 'My Account', current_user %>
+            <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
+          <%# user is not logged in, show signup and login links %>
+          <% else %>
+            <%= link_to 'Sign In', new_user_session_path %> |
+            <%= link_to 'Register Now', new_user_registration_path %>
+          <% end %>
 
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+
+        <%= yield %>
+
+
+        </div>
+
+      </div>
 </body>
 </html>

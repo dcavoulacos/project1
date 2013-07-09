@@ -12,6 +12,15 @@
  *= require_tree .
  */
 
+#wrapper {
+    margin: 0 auto;
+    width: 700px;
+}
+
+#content {
+    width: 100%;
+}
+
 
 .comment-content {
 	font-style: italic;
@@ -19,4 +28,8 @@
 
 .subcomments {
 	list-style-type: none;
+}
+
+.net-vote {
+	text-align: center;
 }

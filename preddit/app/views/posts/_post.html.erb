@@ -1,35 +1,36 @@
 <div class="post">
-  	<br>
   	<table>
       <tr>
-        <td>
-        <% if current_user && current_user.votes.where(:post_id => post.id, :up => true).present? %>
-          <%= button_to "x", votes_path(vote: {user_id: current_user, post_id: post.id}, method: 'delete') %>
-          <%= button_to "↓", votes_path(vote: {post_id: post.id, up: false}) %>
-        <% elsif current_user && current_user.votes.where(:post_id => post.id, :up => false).present? %>
-          <%= button_to "↑", votes_path(vote: {post_id: post.id, up: true}) %>
-          <%= button_to "x", votes_path(vote: {user_id: current_user, post_id: post.id}, method: 'delete') %>
-        <% else %>
-          <%= button_to "↑", votes_path(vote: {post_id: post.id, up: true}) %>
-          <%= button_to "↓", votes_path(vote: {post_id: post.id, up: false}) %>
-        <% end %>
-        </td>
-        <td>
           <% if post.link.present? %>
           <div class="post-title"><%= link_to post.title, post.link %></div>
           <% else %>
           <div class="post-link"><%= link_to post.title, post %></div>
           <% end %>
+      <tr>
+      <tr>
+        <td>
+        <% if current_user && current_user.votes.where(:post_id => post.id, :up => true).present? %>
+          <%=   %>
+          <%= button_to "Unvote", votes_path(vote: {user_id: current_user, post_id: post.id}, method: 'delete') %>
+          <%= link_to image_tag("/downvote.png"), votes_path(vote: {post_id: post.id, up: false}) %>
+        <% elsif current_user && current_user.votes.where(:post_id => post.id, :up => false).present? %>
+          <%= link_to image_tag("/upvote.png"), votes_path(vote: {post_id: post.id, up: true}) %>
+          <%= button_to "Unvote", votes_path(vote: {user_id: current_user, post_id: post.id}, method: 'delete') %>
+        <% else %>
+          <%= link_to image_tag("/upvote.png"), votes_path(vote: {post_id: post.id, up: true}) %><br>
+            <div class="net-vote">
+            <%= post.net_vote_count %></div>
+          <%= link_to image_tag("/downvote.png"), votes_path(vote: {post_id: post.id, up: false}) %>
+        <% end %>
+        </td>
+        <td>
           <div class="post-author">Posted by <%= link_to post.user.username, post.user %> <%= time_ago_in_words(post.created_at) %> ago
           </div>
           <div class="post-show">
               <%= link_to 'Comments', post %>
               (<%= post.comments.count%>)
-          </div>
-          <div class="post-votes">
-          Up votes: <%= post.votes.where(up: true).count %>
-          Down votes: <%= post.votes.where(up: false).count %>
-          Net: <%= post.net_vote_count %>
+              Up votes: <%= post.votes.where(up: true).count %>
+              Down votes: <%= post.votes.where(up: false).count %>
           </div>
           <div class="post-modify">
             <% if current_user == post.user %>
