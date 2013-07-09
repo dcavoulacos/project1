@@ -3,16 +3,16 @@
       <tr>
         <td>
           <% if current_user && current_user.votes.where(:comment_id => comment.id, :up => true).present? %>
-            <%= button_to "Unvote", votes_path(vote: {user_id: current_user, comment_id: comment.id}, method: 'delete') %>
-            <%= link_to image_tag("/downvote.png"), votes_path(vote: {comment_id: comment.id, up: false}) %>
+            <%= button_to "X", votes_path(vote: {user_id: current_user, comment_id: comment.id}, method: 'delete') %>
+            <%= link_to image_tag("/downvote.png"), votes_path(vote: {comment_id: comment.id, up: false}), method: :post %>
           <% elsif current_user && current_user.votes.where(:comment_id => comment.id, :up => false).present? %>
-            <%= link_to image_tag("/upvote.png"), votes_path(vote: {comment_id: comment.id, up: true}) %>
+            <%= link_to image_tag("/upvote.png"), votes_path(vote: {comment_id: comment.id, up: true}), method: :post %>
             <%= button_to "x", votes_path(vote: {user_id: current_user, comment_id: comment.id}, method: 'delete') %>
           <% else %>
-            <%= link_to image_tag("/upvote.png"), votes_path(vote: {comment_id: comment.id, up: true}) %><br>
+            <%= link_to image_tag("/upvote.png"), votes_path(vote: {comment_id: comment.id, up: true}), method: :post %><br>
               <div class="net-vote">
               <%= comment.votes.where(up: true).count - comment.votes.where(up:false).count %></div>
-            <%= link_to image_tag("/downvote.png"), votes_path(vote: {comment_id: comment.id, up: false}) %>
+            <%= link_to image_tag("/downvote.png"), votes_path(vote: {comment_id: comment.id, up: false}), method: :post %>
           <% end %>
         </td>
         <td>

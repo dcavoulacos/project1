@@ -11,16 +11,16 @@
         <td>
         <% if current_user && current_user.votes.where(:post_id => post.id, :up => true).present? %>
           <%=   %>
-          <%= button_to "Unvote", votes_path(vote: {user_id: current_user, post_id: post.id}, method: 'delete') %>
-          <%= link_to image_tag("/downvote.png"), votes_path(vote: {post_id: post.id, up: false}) %>
+          <%= button_to "X", votes_path(vote: {user_id: current_user, post_id: post.id}, method: 'delete') %>
+          <%= link_to image_tag("/downvote.png"), votes_path(vote: {post_id: post.id, up: false}), method: :post %>
         <% elsif current_user && current_user.votes.where(:post_id => post.id, :up => false).present? %>
-          <%= link_to image_tag("/upvote.png"), votes_path(vote: {post_id: post.id, up: true}) %>
+          <%= link_to image_tag("/upvote.png"), votes_path(vote: {post_id: post.id, up: true}), method: :post %>
           <%= button_to "Unvote", votes_path(vote: {user_id: current_user, post_id: post.id}, method: 'delete') %>
         <% else %>
-          <%= link_to image_tag("/upvote.png"), votes_path(vote: {post_id: post.id, up: true}) %><br>
+          <%= link_to image_tag("/upvote.png"), votes_path(vote: {post_id: post.id, up: true}), method: :post %><br>
             <div class="net-vote">
             <%= post.net_vote_count %></div>
-          <%= link_to image_tag("/downvote.png"), votes_path(vote: {post_id: post.id, up: false}) %>
+          <%= link_to image_tag("/downvote.png"), votes_path(vote: {post_id: post.id, up: false}), method: :post %>
         <% end %>
         </td>
         <td>
