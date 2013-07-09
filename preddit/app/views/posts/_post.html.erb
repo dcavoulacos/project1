@@ -1,5 +1,6 @@
 <div class="post">
-  	<table>
+  	<br>
+    <table>
       <tr>
           <% if post.link.present? %>
           <div class="post-title"><%= link_to post.title, post.link %></div>
@@ -9,13 +10,19 @@
       <tr>
       <tr>
         <td>
+        <!-- if already voted up -->
         <% if current_user && current_user.votes.where(:post_id => post.id, :up => true).present? %>
-          <%=   %>
-          <%= button_to "X", votes_path(vote: {user_id: current_user, post_id: post.id}, method: 'delete') %>
+          <%= image_tag("/upvoted.png") %><br>
+          <div class="net-vote">
+            <%= post.net_vote_count %></div>
           <%= link_to image_tag("/downvote.png"), votes_path(vote: {post_id: post.id, up: false}), method: :post %>
+        <!-- if already voted down -->
         <% elsif current_user && current_user.votes.where(:post_id => post.id, :up => false).present? %>
-          <%= link_to image_tag("/upvote.png"), votes_path(vote: {post_id: post.id, up: true}), method: :post %>
-          <%= button_to "Unvote", votes_path(vote: {user_id: current_user, post_id: post.id}, method: 'delete') %>
+          <%= link_to image_tag("/upvote.png"), votes_path(vote: {post_id: post.id, up: true}), method: :post %><br>
+          <div class="net-vote">
+            <%= post.net_vote_count %></div>
+          <%= image_tag("/downvoted.png") %>
+        <!-- if haven't voted -->
         <% else %>
           <%= link_to image_tag("/upvote.png"), votes_path(vote: {post_id: post.id, up: true}), method: :post %><br>
             <div class="net-vote">
@@ -32,6 +39,9 @@
               Up votes: <%= post.votes.where(up: true).count %>
               Down votes: <%= post.votes.where(up: false).count %>
           </div>
+          <% if (current_user && current_user.votes.where(:post_id => post.id, :up => true).present?) || (current_user && current_user.votes.where(:post_id => post.id, :up => false).present?) %>
+              <%= button_to "Unvote", votes_path(vote: {user_id: current_user, post_id: post.id}, method: 'delete') %>
+          <% end %>
           <div class="post-modify">
             <% if current_user == post.user %>
             <%= link_to 'Edit', edit_post_path(post) %>
